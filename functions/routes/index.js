@@ -8,19 +8,17 @@ const {routeKeys} = require("../helpers");
 
 
 const {
-    getProjects,
-    getProjectById,
-    createProject,
-    updateProject,
-    removeProject
-} = require("../controllers/project.controller"); 
+  getProjects,
+  createProject,
+  updateProject,
+  removeProject,
+} = require("../controllers/project.controller");
 
 const {
-    getTags,
-    getTagById,
-    updateTag,
-    createTag,
-    removeTag
+  getTags,
+  updateTag,
+  createTag,
+  removeTag,
 } = require("../controllers/tag.controller");
 
 

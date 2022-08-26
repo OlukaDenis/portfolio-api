@@ -1,7 +1,6 @@
 "use strict";
 
 const express = require("express");
-const fileUpload = require("express-fileupload");
 const functions = require("firebase-functions");
 const cookieParser = require("cookie-parser");
 
@@ -10,9 +9,6 @@ const cors = require("cors");
 
 // admin.initializeApp();
 const app = express();
-
-// image upload
-app.use(fileUpload());
 
 const baseRoute = "/api/v1";
 const appRoutes = require("./routes");

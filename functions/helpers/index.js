@@ -1,5 +1,4 @@
 const moment = require("moment");
-const base64 = require("base-64");
 
 moment.locale();
 
@@ -15,15 +14,15 @@ const PAYMENT_STATUS = {
 const getDateTime = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
 
 const dbKeys = {
-    PROJECTS: "projects",
-    TAGS: "tags"
+  PROJECTS: "projects",
+  TAGS: "tags",
 };
 
 const PAGE_SIZE = 10;
 
 const routeKeys = {
   PROJECTS: "projects",
-  TAGS: "tags"
+  TAGS: "tags",
 };
 
 const LogAction = {
@@ -31,7 +30,7 @@ const LogAction = {
   USER_UPDATE: 2,
   USER_DELETE: 3,
   USER_LOGIN: 4,
-  USER_LOGOUT: 5
+  USER_LOGOUT: 5,
 };
 Object.freeze(LogAction);
 
