@@ -8,12 +8,11 @@ export const errorHandler = (
     next: NextFunction
 ) => {
 
-    console.log("Error middleware: ", error);
     const status = error.statusCode || 500;
 
     res.status(status).json({
         status: status,
         success: false,
         message: error.message
-    })
+    });
 };
