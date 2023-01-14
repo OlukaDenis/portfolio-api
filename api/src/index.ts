@@ -1,15 +1,13 @@
-import * as dotenv from "dotenv";
-import express from "express";
-import cors from "cors";
-import helmet from "helmet";
-import * as winston from "winston";
-import * as expressWinston from "express-winston";
+import * as dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import * as winston from 'winston';
+import * as expressWinston from 'express-winston';
 import debug from 'debug';
 
-import { BaseRoutesConfig } from "./common/base/base-route.config";
-import { UserRoutes } from "./users/user.route";
-import { notFoundHandler } from "./middleware/not-found.middleware";
-import { errorHandler } from "./middleware/error.middleware";
+import { BaseRoutesConfig, errorHandler, notFoundHandler } from './common';
+import { UserRoutes } from './users/user.route';
 const debugLog: debug.IDebugger = debug('app');
 
 const routes: Array<BaseRoutesConfig> = [];

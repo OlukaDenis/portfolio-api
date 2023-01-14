@@ -1,7 +1,7 @@
 // /* eslint-disable @ts-ignore */
-import { CreateUserDto, PatchUserDto } from "../dto";
-import mongooseService from "../../common";
-import { helpers } from "../../common";
+import { CreateUserDto, PatchUserDto } from '../dto';
+import mongooseService from '../../common';
+import { helpers } from '../../common';
 class UserDao {
     users: Array<CreateUserDto> = [];
 
@@ -10,19 +10,19 @@ class UserDao {
     userSchema = new this.Schema({
         phone: {
             type: String,
-            required: "Phone required"
+            required: 'Phone required'
         },
         email: {
             type: String,
-            required: "Email required"
+            required: 'Email required'
         },
         firstName: {
             type: String,
-            required: "First name required"
+            required: 'First name required'
         },
         lastName: {
             type: String,
-            required: "Last name required"
+            required: 'Last name required'
         },
         password: {
             type: String,
@@ -33,7 +33,7 @@ class UserDao {
     User = mongooseService.getMongoose().model('Users', this.userSchema);
 
     constructor() {
-        console.log("Created new instance of UsersDao");
+        console.log('Created new instance of UsersDao');
     }
 
     async add(dto: CreateUserDto) {
@@ -58,6 +58,12 @@ class UserDao {
 
     async getByEmail(email: string) {
         return this.User.findOne({ email: email }).exec();
+    }
+
+    async getUserByEmailWithPassword(email: string) {
+        return this.User.findOne({ email: email })
+            .select('_id email +password')
+            .exec();
     }
 
     async patchById(id: string, dto: PatchUserDto) {

@@ -5,6 +5,6 @@ export class HttpException extends Error {
     constructor(statusCode: number, message: string) {
         super(message);
         this.statusCode = statusCode;
-        this.message = message.replace(/['"]+/g, "");
+        this.message = message.replace(/['"]+/g, '');
     }
 }

@@ -1,5 +1,7 @@
-import { HttpException } from "../common";
-import { Request, Response, NextFunction } from "express";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+import { HttpException } from '..';
+import { Request, Response, NextFunction } from 'express';
 
 export const errorHandler = (
     error: HttpException,

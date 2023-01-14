@@ -1,4 +1,4 @@
-import * as express from "express";
+import * as express from 'express';
 export abstract class BaseRoutesConfig {
     app: express.Application;
     name: string;

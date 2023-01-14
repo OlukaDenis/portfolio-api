@@ -1,18 +1,18 @@
-import { BaseRoutesConfig } from "../common/base/base-route.config";
-import * as express from "express";
+import { BaseRoutesConfig } from '../common/base/base-route.config';
+import * as express from 'express';
 
-import userController from "./controllers/user.controller";
-import userValidator from "./validators/user.validator";
+import userController from './controllers/user.controller';
+import userValidator from './validators/user.validator';
 
 export class UserRoutes extends BaseRoutesConfig {
 
     constructor(app: express.Application) {
-        super(app, "UserRoutes");
+        super(app, 'UserRoutes');
     }
 
     configureRoutes() {
 
-        this.app.route("/users")
+        this.app.route('/users')
             .get(userController.getList)
             .post(
                 userValidator.createUserValidator,

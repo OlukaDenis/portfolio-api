@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
-import argon2 from "argon2";
-import userService from "../services/user.service";
-import { sendSuccess } from "../../common";
+import { Request, Response } from 'express';
+import argon2 from 'argon2';
+import userService from '../services/user.service';
+import { sendSuccess } from '../../common';
 
 class UsersController {
     async getList(req: Request, res: Response) {

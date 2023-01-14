@@ -1,10 +1,10 @@
-import Joi from "joi"
-import debug from "debug";
-import { NextFunction, Request, Response } from "express";
-import { sendFailure } from "../../common";
-import userService from "../services/user.service";
+import Joi from 'joi'
+import debug from 'debug';
+import { NextFunction, Request, Response } from 'express';
+import { sendFailure } from '../../common';
+import userService from '../services/user.service';
 
-const log: debug.IDebugger = debug("app:users-controller");
+const log: debug.IDebugger = debug('app:users-controller');
 class UserValidator {
     async createUserValidator(req: Request, res: Response, next: NextFunction) {
         const validation = Joi.object({
@@ -27,7 +27,7 @@ class UserValidator {
     async validateSameEmailDoesntExist(req: Request, res: Response, next: NextFunction) {
         const user = await userService.getUserByEmail(req.body.email);
         if (user) {
-            sendFailure(res, "User email already exists", 400);
+            sendFailure(res, 'User email already exists', 400);
         } else {
             next();
         }
@@ -38,7 +38,7 @@ class UserValidator {
         if (user && user.id === req.params.id) {
             next();
         } else {
-            sendFailure(res, "Invalid email", 400);
+            sendFailure(res, 'Invalid email', 400);
         }
     }
 
