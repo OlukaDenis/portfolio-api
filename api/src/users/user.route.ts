@@ -1,4 +1,4 @@
-import { BaseRoutesConfig } from "../routes/base/base-route.config";
+import { BaseRoutesConfig } from "../common/base/base-route.config";
 import * as express from "express";
 
 import userController from "./controllers/user.controller";
@@ -13,32 +13,22 @@ export class UserRoutes extends BaseRoutesConfig {
     configureRoutes() {
 
         this.app.route("/users")
-            .get(userController.listUsers)
+            .get(userController.getList)
             .post(
                 userValidator.createUserValidator,
-                userController.createUser
+                userValidator.validateSameEmailDoesntExist,
+                userController.create
             );
 
-        this.app.route("/users/:id")
-            .all((req: express.Request, res: express.Response, next: express.NextFunction) => {
-                // this middleware function runs before any request to /users/:userId
-                // but it doesn't accomplish anything just yet---
-                // it simply passes control to the next applicable function below using next()
-                next();
-            })
-            .get((req: express.Request, res: express.Response) => {
-                res.status(200).send(`GET requested for id ${req.params.id}`);
-            })
-            .put((req: express.Request, res: express.Response) => {
-                res.status(200).send(`PUT requested for id ${req.params.id}`);
-            })
-            .patch((req: express.Request, res: express.Response) => {
-                res.status(200).send(`PATCH requested for id ${req.params.id}`);
-            })
-            .delete((req: express.Request, res: express.Response) => {
-                res.status(200).send(`DELETE requested for id ${req.params.id}`);
-            });
+        this.app.route(`/users/:id`)
+            .all(userValidator.validateUserExists)
+            .get(userController.getById)
+            .delete(userController.remove);
 
+        this.app.patch(`/users/:id`, [
+            userValidator.validatePatchEmail,
+            userController.patch
+        ]);
         return this.app;
     }
 }

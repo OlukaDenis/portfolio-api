@@ -4,25 +4,28 @@ import UserDao from "../daos/user.dao";
 
 class UserService implements CRUD {
 
-    async create(resource: CreateUserDto) {
-        resource.id = Math.floor(Math.random() * 1000000).toString();
-        return UserDao.addUser(resource);
+    async create(dto: CreateUserDto) {
+        return UserDao.add(dto);
     }
 
     async list(limit: number, page: number) {
-        return UserDao.getUsers();
+        return UserDao.get(limit, page);
     }
 
     async getById(id: string) {
-        return UserDao.getUserById(id);
+        return UserDao.getById(id);
     }
 
     async deleteById(id: string) {
         return "null";
     }
 
-    async patchById(id: string, resource: PatchUserDto) {
-        return UserDao.patchUserById(id, resource);
+    async patchById(id: string, dto: PatchUserDto) {
+        return UserDao.patchById(id, dto);
+    }
+
+    async getUserByEmail(email: string) {
+        return UserDao.getByEmail(email);
     }
 }
 

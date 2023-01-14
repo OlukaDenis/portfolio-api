@@ -6,7 +6,7 @@ import * as winston from "winston";
 import * as expressWinston from "express-winston";
 import debug from 'debug';
 
-import { BaseRoutesConfig } from "./routes/base/base-route.config";
+import { BaseRoutesConfig } from "./common/base/base-route.config";
 import { UserRoutes } from "./users/user.route";
 import { notFoundHandler } from "./middleware/not-found.middleware";
 import { errorHandler } from "./middleware/error.middleware";
@@ -28,33 +28,22 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.use(expressWinston.logger({
-    transports: [
-        new winston.transports.Console()
-    ],
+const loggerOptions: expressWinston.LoggerOptions = {
+    transports: [new winston.transports.Console()],
     format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.json()
-    )
-}));
+        winston.format.json(),
+        winston.format.prettyPrint(),
+        winston.format.colorize({ all: true })
+    ),
+};
 
-// if (!process.env.DEBUG) {
-//     loggerOptions.meta = false;
-// }
+if (!process.env.DEBUG) {
+    loggerOptions.meta = false;
+}
 
-// app.use(expressWinston.logger(loggerOptions));
+app.use(expressWinston.logger(loggerOptions));
 
 routes.push(new UserRoutes(app));
-
-app.use(expressWinston.errorLogger({
-    transports: [
-        new winston.transports.Console()
-    ],
-    format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.json()
-    )
-}));
 
 app.use(errorHandler);
 app.use(notFoundHandler);
