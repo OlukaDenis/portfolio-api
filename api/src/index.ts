@@ -8,11 +8,18 @@ import debug from 'debug';
 
 import { BaseRoutesConfig, errorHandler, notFoundHandler } from './common';
 import { UserRoutes } from './users/user.route';
+import { AuthRoutes } from './auth/auth.router';
+
 const debugLog: debug.IDebugger = debug('app');
 
 const routes: Array<BaseRoutesConfig> = [];
 
 dotenv.config();
+
+// const dotenvResult = dotenv.config();
+// if (dotenvResult.error) {
+//     throw dotenvResult.error;
+// }
 
 if (!process.env.PORT) {
     process.exit(1);
@@ -41,6 +48,7 @@ if (!process.env.DEBUG) {
 
 app.use(expressWinston.logger(loggerOptions));
 
+routes.push(new AuthRoutes(app))
 routes.push(new UserRoutes(app));
 
 app.use(errorHandler);

@@ -19,13 +19,15 @@ class AuthMiddleware {
                 req.body = {
                     userId: user._id,
                     email: user.email,
-                    permissionFlags: user.permissionFlags,
+                    phone: user.phone
                 };
                 return next();
             }
         }
         // Giving the same message in both cases
         // helps protect against cracking attempts:
-        sendFailure(res, 'Invalid email and/or password', 400);
+        sendFailure(res, 'Invalid email or password', 400);
     }
 }
+
+export default new AuthMiddleware()
