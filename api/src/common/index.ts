@@ -8,5 +8,6 @@ export * from './helpers'
 export * from './middleware/error.middleware'
 export * from './middleware/not-found.middleware'
 export * from './base/base-route.config'
+export * from './types/jwt.type'
 
 export default mongooseService

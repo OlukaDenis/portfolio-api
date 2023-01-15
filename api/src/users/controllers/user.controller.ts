@@ -11,6 +11,7 @@ class UsersController {
 
     async getById(req: Request, res: Response) {
         const user = await userService.getById(req.params.id);
+        user?._id
         return sendSuccess(res, user, 200);
     }
 
